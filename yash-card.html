@@ -7,62 +7,71 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    background: #f0f4f8;
+    background: #ffffff;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: Arial, sans-serif;
-    padding: 20px;
+    padding: 24px;
   }
-  .card {
-    background: white;
-    border-radius: 16px;
-    padding: 30px 24px;
-    width: 100%;
-    max-width: 360px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  .card { width: 100%; max-width: 360px; }
+  .owner-section {
+    text-align: center;
+    padding: 20px 0 24px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
   }
-  .header { text-align: center; margin-bottom: 28px; }
-  .avatar {
-    width: 70px; height: 70px;
-    background: #e8f4fd;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 32px;
-    margin: 0 auto 12px;
+  .car-icon { font-size: 36px; margin-bottom: 8px; }
+  .owner-name { font-size: 26px; font-weight: 700; color: #111; }
+  .owner-sub { font-size: 12px; color: #aaa; margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
+  .main-btns { display: flex; gap: 12px; margin-bottom: 16px; }
+  .main-btn {
+    flex: 1;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 6px; padding: 16px 10px; border-radius: 12px; border: none;
+    cursor: pointer; font-size: 14px; font-weight: 600; text-decoration: none;
+    transition: opacity 0.2s;
   }
-  .owner-name { font-size: 24px; font-weight: bold; color: #1a1a2e; }
-  .label { font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-  .section-title { font-size: 12px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; margin-top: 24px; }
-  .btn {
-    display: flex; align-items: center; gap: 12px;
-    width: 100%; padding: 14px 18px; border-radius: 12px;
-    border: none; cursor: pointer; font-size: 15px; font-weight: 600;
-    text-decoration: none; margin-bottom: 10px; transition: opacity 0.2s;
-  }
-  .btn:active { opacity: 0.8; }
+  .main-btn:active { opacity: 0.7; }
+  .main-btn .icon { font-size: 26px; }
   .btn-call { background: #e8f5e9; color: #2e7d32; }
-  .btn-whatsapp { background: #e8f5e9; color: #1b5e20; }
-  .btn-icon { font-size: 20px; }
-  .btn-label { flex: 1; text-align: left; }
-  .divider { height: 1px; background: #f0f0f0; margin: 20px 0; }
-  .friend-name { font-size: 15px; font-weight: 600; color: #333; margin-bottom: 10px; }
-  .mini-btns { display: flex; gap: 10px; }
-  .mini-btn {
-    flex: 1; display: flex; align-items: center; justify-content: center;
-    gap: 8px; padding: 12px; border-radius: 10px; border: none;
-    cursor: pointer; font-size: 14px; font-weight: 600;
+  .btn-wa { background: #e8f5e9; color: #1b5e20; }
+  .divider { height: 1px; background: #eee; margin: 16px 0; }
+  .section-title { font-size: 11px; color: #bbb; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+  .contact-row {
+    display: flex; align-items: center; justify-content: space-between; padding: 10px 0;
+  }
+  .contact-name { font-size: 15px; font-weight: 600; color: #222; }
+  .contact-type { font-size: 11px; color: #aaa; margin-top: 2px; }
+  .contact-btns { display: flex; gap: 8px; }
+  .small-btn {
+    width: 40px; height: 40px; border-radius: 10px; border: none;
+    cursor: pointer; font-size: 18px; display: flex; align-items: center;
+    justify-content: center; text-decoration: none; transition: opacity 0.2s;
+  }
+  .small-btn:active { opacity: 0.7; }
+  .small-call { background: #fff3e0; }
+  .small-wa { background: #e8f5e9; }
+  .emergency-grid { display: flex; gap: 10px; }
+  .emer-btn {
+    flex: 1; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 5px; padding: 14px 6px; border-radius: 12px;
+    border: none; cursor: pointer; font-size: 12px; font-weight: 600;
     text-decoration: none; transition: opacity 0.2s;
   }
-  .mini-btn:active { opacity: 0.8; }
-  .mini-call { background: #fff3e0; color: #e65100; }
-  .mini-wa { background: #e8f5e9; color: #1b5e20; }
-  .footer { text-align: center; margin-top: 24px; font-size: 11px; color: #bbb; }
+  .emer-btn:active { opacity: 0.7; }
+  .emer-btn .icon { font-size: 24px; }
+  .emer-police { background: #e3f2fd; color: #1565c0; }
+  .emer-ambulance { background: #fce4ec; color: #c62828; }
+  .emer-fire { background: #fff3e0; color: #e65100; }
+  .footer { text-align: center; margin-top: 24px; font-size: 11px; color: #ccc; }
 </style>
 </head>
 <body>
-<div id="app"><div style="text-align:center;padding:40px;color:#999">Loading...</div></div>
+<div id="app">
+  <div style="text-align:center;color:#aaa;padding:40px">Loading...</div>
+</div>
 <script>
 const SUPABASE_URL = 'https://gpxvajcsbwctyshicbvq.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_SpTLdM13SauXhA_O1yTqag_dRRK_XeK';
@@ -83,37 +92,79 @@ async function load() {
 }
 
 function render(c) {
-  const phone = c.owner_phone || '';
-  const wa = c.owner_whatsapp || phone.replace(/[^0-9]/g,'');
-  const friendPhone = c.friend_phone || '';
-  const friendWa = friendPhone.replace(/[^0-9]/g,'');
+  const phone    = c.owner_phone || '';
+  const wa       = c.owner_whatsapp || phone.replace(/[^0-9]/g,'');
+  const famPhone = c.family_phone || '';
+  const famWa    = famPhone.replace(/[^0-9]/g,'');
+  const friPhone = c.friend_phone || '';
+  const friWa    = friPhone.replace(/[^0-9]/g,'');
 
   document.getElementById('app').innerHTML = `
     <div class="card">
-      <div class="header">
-        <div class="avatar">👤</div>
+      <div class="owner-section">
+        <div class="car-icon">🚗</div>
         <div class="owner-name">${c.owner_name || 'Owner'}</div>
-        <div class="label">Vehicle Owner</div>
+        <div class="owner-sub">Vehicle Owner</div>
       </div>
-      <div class="section-title">Contact Owner</div>
-      <a href="tel:${phone}" class="btn btn-call">
-        <span class="btn-icon">📞</span>
-        <span class="btn-label">Call Owner</span>
-        <span>›</span>
-      </a>
-      <a href="https://wa.me/${wa}" target="_blank" class="btn btn-whatsapp">
-        <span class="btn-icon">💬</span>
-        <span class="btn-label">WhatsApp</span>
-        <span>›</span>
-      </a>
-      ${friendPhone ? `
+
+      <div class="main-btns">
+        <a href="tel:${phone}" class="main-btn btn-call">
+          <span class="icon">📞</span>
+          <span>Call Owner</span>
+        </a>
+        <a href="https://wa.me/${wa}" target="_blank" class="main-btn btn-wa">
+          <span class="icon">💬</span>
+          <span>WhatsApp</span>
+        </a>
+      </div>
+
+      ${famPhone || friPhone ? `
       <div class="divider"></div>
-      <div class="section-title">Emergency Contact</div>
-      <div class="friend-name">👥 Friend</div>
-      <div class="mini-btns">
-        <a href="tel:${friendPhone}" class="mini-btn mini-call">📞 Call</a>
-        <a href="https://wa.me/${friendWa}" target="_blank" class="mini-btn mini-wa">💬 WhatsApp</a>
+      <div class="section-title">Family & Friend</div>
+      ${famPhone ? `
+      <div class="contact-row">
+        <div>
+          <div class="contact-name">👨‍👩‍👧 Family</div>
+          <div class="contact-type">Emergency contact</div>
+        </div>
+        <div class="contact-btns">
+          <a href="tel:${famPhone}" class="small-btn small-call">📞</a>
+          <a href="https://wa.me/${famWa}" target="_blank" class="small-btn small-wa">💬</a>
+        </div>
       </div>` : ''}
+      ${friPhone ? `
+      <div class="contact-row">
+        <div>
+          <div class="contact-name">👤 Friend</div>
+          <div class="contact-type">Emergency contact</div>
+        </div>
+        <div class="contact-btns">
+          <a href="tel:${friPhone}" class="small-btn small-call">📞</a>
+          <a href="https://wa.me/${friWa}" target="_blank" class="small-btn small-wa">💬</a>
+        </div>
+      </div>` : ''}
+      ` : ''}
+
+      <div class="divider"></div>
+      <div class="section-title">Emergency Services</div>
+      <div class="emergency-grid">
+        <a href="tel:100" class="emer-btn emer-police">
+          <span class="icon">🚔</span>
+          <span>Police</span>
+          <span>100</span>
+        </a>
+        <a href="tel:108" class="emer-btn emer-ambulance">
+          <span class="icon">🚑</span>
+          <span>Ambulance</span>
+          <span>108</span>
+        </a>
+        <a href="tel:101" class="emer-btn emer-fire">
+          <span class="icon">🚒</span>
+          <span>Fire</span>
+          <span>101</span>
+        </a>
+      </div>
+
       <div class="footer">🔒 Numbers are private</div>
     </div>`;
 }
