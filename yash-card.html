@@ -4,442 +4,121 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vehicle Owner Card</title>
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Noto+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0a0c10;
-    --card: #12151c;
-    --accent: #00e5ff;
-    --accent2: #ff6b35;
-    --text: #e8eaf0;
-    --muted: #6b7280;
-    --border: #1e2330;
-  }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
-    background: var(--bg);
+    background: #f0f4f8;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Noto Sans', sans-serif;
+    font-family: Arial, sans-serif;
     padding: 20px;
-    overflow-x: hidden;
   }
-
-  body::before {
-    content: '';
-    position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(ellipse at 60% 40%, rgba(0,229,255,0.04) 0%, transparent 60%),
-                radial-gradient(ellipse at 30% 70%, rgba(255,107,53,0.04) 0%, transparent 50%);
-    pointer-events: none;
-  }
-
   .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 20px;
+    background: white;
+    border-radius: 16px;
+    padding: 30px 24px;
     width: 100%;
-    max-width: 400px;
-    overflow: hidden;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,229,255,0.05);
-    animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    opacity: 0;
-    transform: translateY(30px);
+    max-width: 360px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   }
-
-  @keyframes slideUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .card-header {
-    background: linear-gradient(135deg, #0d1117 0%, #1a1f2e 100%);
-    padding: 28px 24px 20px;
-    position: relative;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .card-header::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 24px; right: 24px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    opacity: 0.4;
-  }
-
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(0,229,255,0.08);
-    border: 1px solid rgba(0,229,255,0.2);
-    color: var(--accent);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 20px;
-    margin-bottom: 16px;
-  }
-
-  .badge::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: var(--accent);
+  .header { text-align: center; margin-bottom: 28px; }
+  .avatar {
+    width: 70px; height: 70px;
+    background: #e8f4fd;
     border-radius: 50%;
-    animation: pulse 2s infinite;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+    margin: 0 auto 12px;
   }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
-  }
-
-  .owner-name {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 36px;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: 1px;
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-
-  .owner-id {
-    font-size: 12px;
-    color: var(--muted);
-    letter-spacing: 0.5px;
-  }
-
-  .vehicle-plate {
-    margin-top: 16px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(255,107,53,0.08);
-    border: 1px solid rgba(255,107,53,0.25);
-    border-radius: 8px;
-    padding: 8px 14px;
-  }
-
-  .plate-icon { font-size: 16px; }
-
-  .plate-text {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--accent2);
-    letter-spacing: 2px;
-  }
-
-  .plate-label {
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-
-  .card-body {
-    padding: 24px;
-  }
-
-  .section-label {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 14px;
-  }
-
-  .btn-group {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 24px;
-  }
-
+  .owner-name { font-size: 24px; font-weight: bold; color: #1a1a2e; }
+  .label { font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+  .section-title { font-size: 12px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; margin-top: 24px; }
   .btn {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 16px 20px;
-    border-radius: 12px;
-    border: none;
-    cursor: pointer;
-    font-family: 'Noto Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    position: relative;
-    overflow: hidden;
+    display: flex; align-items: center; gap: 12px;
+    width: 100%; padding: 14px 18px; border-radius: 12px;
+    border: none; cursor: pointer; font-size: 15px; font-weight: 600;
+    text-decoration: none; margin-bottom: 10px; transition: opacity 0.2s;
   }
-
-  .btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(255,255,255,0.05);
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-
-  .btn:hover::before { opacity: 1; }
-  .btn:active { transform: scale(0.98); }
-
-  .btn-call {
-    background: linear-gradient(135deg, #1a2a1a, #1e3a1e);
-    border: 1px solid rgba(72, 199, 142, 0.3);
-    color: #48c78e;
-  }
-
-  .btn-whatsapp {
-    background: linear-gradient(135deg, #1a2a1a, #1e3520);
-    border: 1px solid rgba(37, 211, 102, 0.3);
-    color: #25d366;
-  }
-
-  .btn-icon {
-    width: 38px; height: 38px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    flex-shrink: 0;
-  }
-
-  .btn-call .btn-icon { background: rgba(72,199,142,0.12); }
-  .btn-whatsapp .btn-icon { background: rgba(37,211,102,0.12); }
-
-  .btn-text { flex: 1; text-align: left; }
-  .btn-title { display: block; font-size: 15px; font-weight: 600; }
-  .btn-sub { display: block; font-size: 11px; opacity: 0.6; font-weight: 400; margin-top: 1px; }
-
-  .btn-arrow { font-size: 18px; opacity: 0.4; }
-
-  .divider {
-    height: 1px;
-    background: var(--border);
-    margin: 0 0 20px;
-  }
-
-  .family-section .section-label { margin-bottom: 12px; }
-
-  .contact-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(30,35,48,0.8);
-  }
-
-  .contact-row:last-child { border-bottom: none; }
-
-  .contact-info { display: flex; align-items: center; gap: 10px; }
-
-  .contact-avatar {
-    width: 34px; height: 34px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #1e2330, #252b3d);
-    border: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px;
-  }
-
-  .contact-name { font-size: 13px; color: var(--text); font-weight: 500; }
-  .contact-type { font-size: 11px; color: var(--muted); }
-
-  .contact-btns { display: flex; gap: 8px; }
-
+  .btn:active { opacity: 0.8; }
+  .btn-call { background: #e8f5e9; color: #2e7d32; }
+  .btn-whatsapp { background: #e8f5e9; color: #1b5e20; }
+  .btn-icon { font-size: 20px; }
+  .btn-label { flex: 1; text-align: left; }
+  .divider { height: 1px; background: #f0f0f0; margin: 20px 0; }
+  .friend-name { font-size: 15px; font-weight: 600; color: #333; margin-bottom: 10px; }
+  .mini-btns { display: flex; gap: 10px; }
   .mini-btn {
-    width: 32px; height: 32px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: rgba(255,255,255,0.03);
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px;
-    transition: all 0.2s;
-    text-decoration: none;
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    gap: 8px; padding: 12px; border-radius: 10px; border: none;
+    cursor: pointer; font-size: 14px; font-weight: 600;
+    text-decoration: none; transition: opacity 0.2s;
   }
-
-  .mini-btn:hover { background: rgba(255,255,255,0.08); transform: scale(1.05); }
-
-  .loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .spinner {
-    width: 40px; height: 40px;
-    border: 2px solid var(--border);
-    border-top-color: var(--accent);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
-
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  .loading-text { color: var(--muted); font-size: 13px; letter-spacing: 1px; }
-
-  .error-card {
-    background: rgba(255,59,59,0.08);
-    border: 1px solid rgba(255,59,59,0.2);
-    border-radius: 12px;
-    padding: 20px;
-    color: #ff6b6b;
-    text-align: center;
-    font-size: 14px;
-  }
-
-  .card-footer {
-    padding: 14px 24px;
-    background: rgba(0,0,0,0.2);
-    border-top: 1px solid var(--border);
-    text-align: center;
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.5px;
-  }
+  .mini-btn:active { opacity: 0.8; }
+  .mini-call { background: #fff3e0; color: #e65100; }
+  .mini-wa { background: #e8f5e9; color: #1b5e20; }
+  .footer { text-align: center; margin-top: 24px; font-size: 11px; color: #bbb; }
 </style>
 </head>
 <body>
-
-<div id="app">
-  <div class="loading">
-    <div class="spinner"></div>
-    <span class="loading-text">Loading...</span>
-  </div>
-</div>
-
+<div id="app"><div style="text-align:center;padding:40px;color:#999">Loading...</div></div>
 <script>
 const SUPABASE_URL = 'https://gpxvajcsbwctyshicbvq.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_SpTLdM13SauXhA_O1yTqag_dRRK_XeK';
+const clientId = new URLSearchParams(window.location.search).get('id') || 'yash-001';
 
-// URL se client_id lo, default: yash-001
-const params = new URLSearchParams(window.location.search);
-const clientId = params.get('id') || 'yash-001';
-
-async function loadClient() {
+async function load() {
   try {
     const res = await fetch(
       `${SUPABASE_URL}/rest/v1/clients?client_id=eq.${clientId}&select=*`,
-      {
-        headers: {
-          'apikey': SUPABASE_KEY,
-          'Authorization': `Bearer ${SUPABASE_KEY}`
-        }
-      }
+      { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } }
     );
     const data = await res.json();
-    if (!data || data.length === 0) throw new Error('Client not found');
-    renderCard(data[0]);
-  } catch (e) {
-    document.getElementById('app').innerHTML = `
-      <div style="max-width:400px;width:100%;padding:20px">
-        <div class="error-card">⚠️ Could not load data.<br><small>${e.message}</small></div>
-      </div>`;
+    if (!data || data.length === 0) throw new Error('Not found');
+    render(data[0]);
+  } catch(e) {
+    document.getElementById('app').innerHTML = `<div style="text-align:center;padding:40px;color:red">⚠️ Data load nahi hua</div>`;
   }
 }
 
-function renderCard(c) {
+function render(c) {
   const phone = c.owner_phone || '';
-  const wa = c.owner_whatsapp || phone.replace('+','');
-  const familyPhone = c.family_phone || '';
+  const wa = c.owner_whatsapp || phone.replace(/[^0-9]/g,'');
   const friendPhone = c.friend_phone || '';
-  const vehicle = c.vehicle_number || '—';
+  const friendWa = friendPhone.replace(/[^0-9]/g,'');
 
   document.getElementById('app').innerHTML = `
     <div class="card">
-      <div class="card-header">
-        <div class="badge">Vehicle Owner</div>
+      <div class="header">
+        <div class="avatar">👤</div>
         <div class="owner-name">${c.owner_name || 'Owner'}</div>
-        <div class="owner-id">ID: ${c.client_id}</div>
-        ${vehicle !== '—' ? `
-        <div class="vehicle-plate">
-          <span class="plate-icon">🚗</span>
-          <div>
-            <div class="plate-label">Vehicle No.</div>
-            <div class="plate-text">${vehicle}</div>
-          </div>
-        </div>` : ''}
+        <div class="label">Vehicle Owner</div>
       </div>
-
-      <div class="card-body">
-        <div class="section-label">Contact Owner</div>
-        <div class="btn-group">
-          <a href="tel:${phone}" class="btn btn-call">
-            <div class="btn-icon">📞</div>
-            <div class="btn-text">
-              <span class="btn-title">Call Owner</span>
-              <span class="btn-sub">Direct phone call</span>
-            </div>
-            <span class="btn-arrow">›</span>
-          </a>
-          <a href="https://wa.me/${wa}" target="_blank" class="btn btn-whatsapp">
-            <div class="btn-icon">💬</div>
-            <div class="btn-text">
-              <span class="btn-title">WhatsApp</span>
-              <span class="btn-sub">Send a message</span>
-            </div>
-            <span class="btn-arrow">›</span>
-          </a>
-        </div>
-
-        ${(familyPhone || friendPhone) ? `
-        <div class="divider"></div>
-        <div class="family-section">
-          <div class="section-label">Emergency Contacts</div>
-          ${familyPhone ? `
-          <div class="contact-row">
-            <div class="contact-info">
-              <div class="contact-avatar">👨‍👩‍👧</div>
-              <div>
-                <div class="contact-name">Family Member</div>
-                <div class="contact-type">Emergency contact</div>
-              </div>
-            </div>
-            <div class="contact-btns">
-              <a href="tel:${familyPhone}" class="mini-btn" title="Call">📞</a>
-              <a href="https://wa.me/${familyPhone.replace(/[^0-9]/g,'')}" class="mini-btn" target="_blank" title="WhatsApp">💬</a>
-            </div>
-          </div>` : ''}
-          ${friendPhone ? `
-          <div class="contact-row">
-            <div class="contact-info">
-              <div class="contact-avatar">👤</div>
-              <div>
-                <div class="contact-name">Friend</div>
-                <div class="contact-type">Emergency contact</div>
-              </div>
-            </div>
-            <div class="contact-btns">
-              <a href="tel:${friendPhone}" class="mini-btn" title="Call">📞</a>
-              <a href="https://wa.me/${friendPhone.replace(/[^0-9]/g,'')}" class="mini-btn" target="_blank" title="WhatsApp">💬</a>
-            </div>
-          </div>` : ''}
-        </div>` : ''}
-      </div>
-
-      <div class="card-footer">Numbers are hidden for privacy 🔒</div>
+      <div class="section-title">Contact Owner</div>
+      <a href="tel:${phone}" class="btn btn-call">
+        <span class="btn-icon">📞</span>
+        <span class="btn-label">Call Owner</span>
+        <span>›</span>
+      </a>
+      <a href="https://wa.me/${wa}" target="_blank" class="btn btn-whatsapp">
+        <span class="btn-icon">💬</span>
+        <span class="btn-label">WhatsApp</span>
+        <span>›</span>
+      </a>
+      ${friendPhone ? `
+      <div class="divider"></div>
+      <div class="section-title">Emergency Contact</div>
+      <div class="friend-name">👥 Friend</div>
+      <div class="mini-btns">
+        <a href="tel:${friendPhone}" class="mini-btn mini-call">📞 Call</a>
+        <a href="https://wa.me/${friendWa}" target="_blank" class="mini-btn mini-wa">💬 WhatsApp</a>
+      </div>` : ''}
+      <div class="footer">🔒 Numbers are private</div>
     </div>`;
 }
 
-loadClient();
+load();
 </script>
 </body>
 </html>
